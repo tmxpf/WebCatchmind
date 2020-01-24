@@ -9,3 +9,4 @@ spring:
       enabled: false
   mustache:
     cache: false
+    charset: UTF-8

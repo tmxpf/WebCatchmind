@@ -15,9 +15,9 @@ public class MainController {
         return "/main";
     }
 
-    @GetMapping("/chatRoomList")
+    @GetMapping("/chat/chatRoomList")
     public String chatRoomList() {
-        return "chatPageList/chatRoomList";
+        return "/chat/chatRoomList";
     }
 
 }

@@ -1,0 +1,23 @@
+{{>layout/header}}
+
+<div class="container" id="app" v-cloak xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>채팅방 리스트</h3>
+        </div>
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <label class="input-group-text">방제목</label>
+        </div>
+        <input type="text" class="form-control" id="room_name" name="room_name" value="">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" id="createRoom" name="createRoom">채팅방 개설</button>
+        </div>
+    </div>
+    <ul class="list-group" id="game_room_list" name="game_room_list">
+
+    </ul>
+</div>
+
+{{>layout/footer}}

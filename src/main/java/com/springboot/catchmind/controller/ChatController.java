@@ -8,7 +8,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -34,13 +33,13 @@ public class ChatController {
     }
 
     // 모든 채팅방 목록 반환
-    @GetMapping("/rooms")
+    @GetMapping("/chat/rooms")
     public List<ChatRoom> room() {
         return chatRoomRepository.findAllRoom();
     }
 
     // 채팅방 생성
-    @PostMapping("/chat/room")
+    @PostMapping("/chat/createRoom")
     public ChatRoom createRoom(@RequestParam String name) {
         return chatRoomRepository.createChatRoom(name);
     }
@@ -52,6 +51,7 @@ public class ChatController {
         return "/chat/roomdetail";
     }
 
+    // 특정 채팅방 조회
     @GetMapping("/chat/{roomId}")
     public ChatRoom roomInfo(@PathVariable String roomId) {
         return chatRoomRepository.findRoomById(roomId);

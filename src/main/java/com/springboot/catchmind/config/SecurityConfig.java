@@ -32,7 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .logoutSuccessUrl("/")
                 .and()// 403예외 처리
-                    .exceptionHandling().accessDeniedPage("/common/denied");
+                    .exceptionHandling().accessDeniedPage("/common/denied")
+                .and()
+                    .csrf().disable();
     }
 
 }
