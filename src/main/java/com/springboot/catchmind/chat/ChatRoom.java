@@ -1,13 +1,9 @@
 package com.springboot.catchmind.chat;
 
-import com.springboot.catchmind.dto.ChatMessageDTO;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.socket.WebSocketSession;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 import java.util.UUID;
 
 @Setter
@@ -16,6 +12,7 @@ public class ChatRoom {
 
     private String roomId;
     private String name;
+    private Map<String, Users> users;
 
     public static ChatRoom create(String name) {
         ChatRoom chatRoom = new ChatRoom();

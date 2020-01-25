@@ -10,6 +10,7 @@ public class ChatRoomRepository {
 
     private Map<String, ChatRoom> chatRoomMap;
 
+
     @PostConstruct
     private void init() {
         chatRoomMap = new LinkedHashMap<>();

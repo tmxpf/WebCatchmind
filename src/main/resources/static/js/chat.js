@@ -11,8 +11,10 @@ var chatEvent = {
             _this.createRoom();
         });
 
-        $('#game_room_list').on('click', function() {
-            _this.enterRoom();
+        $('#game_room_list').on('click', function(e) {
+            var roomId = e.target.dataset.roomid;
+
+            _this.enterRoom(roomId);
         });
     },
     data : {
@@ -27,10 +29,11 @@ var chatEvent = {
             url : '/chat/rooms',
             dataType : 'json'
         }).done(function(result) {
+            $('#game_room_list').children().remove();
             chatrooms = result;
 
             chatrooms.forEach(function(item) {
-                var innerHTML = '<li class="list-group-item list-group-item-action" data-innb="' + item.roomId + '">'
+                var innerHTML = '<li class="list-group-item list-group-item-action" data-roomid="' + item.roomId + '">'
                                     + item.name
                                     + '</li>';
 
@@ -54,7 +57,6 @@ var chatEvent = {
                 type : 'POST',
                 url : '/chat/createRoom',
                 dataType : 'json',
-                // contentType : 'application/json;charset=utf-8',
                 data : {name : roomName}
             }).done(function(result) {
                 alert(result.name+"방 개설에 성공하였습니다.");
@@ -70,8 +72,8 @@ var chatEvent = {
         var sender = prompt('대화명을 입력해 주세요.');
 
         if(sender != "" && sender != null && sender != 'undefined') {
-            localStorage.setItem('wschat.sender',sender);
-            localStorage.setItem('wschat.roomId',roomId);
+            localStorage.setItem('wschat.sender', sender);
+            localStorage.setItem('wschat.roomId', roomId);
             location.href="/chat/room/enter/" + roomId;
         }
     }

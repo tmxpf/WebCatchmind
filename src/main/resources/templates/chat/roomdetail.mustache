@@ -1,19 +1,35 @@
-<div class="container" id="app" v-cloak>
+{{>layout/header}}
+
+<div class="container" id="app" style="width: 70%;float: left;">
     <div>
-        <h2>{{room.name}}</h2>
+        <h2>{{roomName}}</h2>
     </div>
     <div class="input-group">
         <div class="input-group-prepend">
             <label class="input-group-text">내용</label>
         </div>
-        <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">
+        <input type="text" class="form-control" id="msg_text" name="msg_text" value="">
         <div class="input-group-append">
-            <button class="btn btn-primary" type="button" @click="sendMessage">보내기</button>
+            <button class="btn btn-primary" type="button" id="msg_push" name="msg_push">보내기</button>
         </div>
     </div>
-    <ul class="list-group">
-        <li class="list-group-item" v-for="message in messages">
-            {{message.sender}} - {{message.message}}</a>
-        </li>
+    <ul class="list-group" id="msg_list" name="msg_list">
+
     </ul>
 </div>
+<div class="container" style="width: 30%;float: left;">
+    <ul class="list-group" id="user_list" name="user_list">
+        <li class="list-group-item">접속자 명단</li>
+        <li class="list-group-item">123123</li>
+        <li class="list-group-item">123123</li>
+        <li class="list-group-item">123123</li>
+    </ul>
+</div>
+
+{{>common/commonJS}}
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/chatRoom.js"></script>
+
+{{>layout/footer}}
