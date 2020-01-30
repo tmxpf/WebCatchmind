@@ -10,3 +10,8 @@ spring:
   mustache:
     cache: false
     charset: UTF-8
+  profiles:
+    active: local
+  redis:
+    host: localhost
+    port: 6379
