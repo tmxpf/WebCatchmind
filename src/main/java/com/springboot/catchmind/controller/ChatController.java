@@ -3,6 +3,7 @@ package com.springboot.catchmind.controller;
 import com.springboot.catchmind.chat.ChatRoom;
 import com.springboot.catchmind.chat.ChatRoomRepository;
 import com.springboot.catchmind.dto.ChatMessageDTO;
+import com.springboot.catchmind.service.RedisPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -16,15 +17,18 @@ import java.util.List;
 public class ChatController {
 
     private final SimpMessageSendingOperations messageSendingOperations;
+    private final RedisPublisher redisPublisher;
     private final ChatRoomRepository chatRoomRepository;
 
     @MessageMapping("/chat/message")
     public void message(ChatMessageDTO message) {
         if(message.getType().equals(ChatMessageDTO.MessageType.ENTER)) {
+            chatRoomRepository.enterChatRoom(message.getRoomId());
             message.setMessage(message.getSender() + "님이 입장하셨습니다.");
         }
 
-        messageSendingOperations.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
+        redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
+//        messageSendingOperations.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 
     //채팅 리스트 화면
